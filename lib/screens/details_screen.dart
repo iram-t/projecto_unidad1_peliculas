@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:projecto_unidad1/widgets/casting_slider.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key});
@@ -16,8 +18,8 @@ class DetailScreen extends StatelessWidget {
               delegate: SliverChildListDelegate(
             [
               _PosterAndTitle(),
-              _PosterAndTitle(),
-              _PosterAndTitle(),
+              _OverView(),
+              CastingSlider(),
             ],
           ))
         ],
@@ -116,6 +118,22 @@ class _PosterAndTitle extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _OverView extends StatelessWidget {
+  const _OverView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Text(
+        'Laboris occaecat excepteur veniam ad quis. Pariatur proident sunt amet aute laborum labore esse. Consequat aute non sit adipisicing culpa ut eu irure eiusmod. Eu excepteur eiusmod excepteur esse in quis qui qui cupidatat aliquip minim qui mollit. Dolore mollit deserunt ea cupidatat. Cupidatat consequat adipisicing adipisicing minim commodo exercitation cupidatat qui non aute labore sint. Velit est officia ut dolore sunt.',
+        textAlign: TextAlign.justify,
+        style: TextStyle(fontSize: 15),
       ),
     );
   }
