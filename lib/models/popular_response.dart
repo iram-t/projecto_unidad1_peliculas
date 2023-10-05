@@ -1,11 +1,51 @@
 import 'dart:convert';
 
+import 'package:projecto_unidad1/models/models.dart';
+
+class PopularResponse {
+  int page;
+  List<Movie> results;
+  int totalPages;
+  int totalResults;
+
+  PopularResponse({
+    required this.page,
+    required this.results,
+    required this.totalPages,
+    required this.totalResults,
+  });
+
+  factory PopularResponse.fromRawJson(String str) =>
+      PopularResponse.fromJson(json.decode(str));
+
+  // String toRawJson() => json.encode(toJson());
+
+  factory PopularResponse.fromJson(Map<String, dynamic> json) =>
+      PopularResponse(
+        page: json["page"],
+        results:
+            List<Movie>.from(json["results"].map((x) => Movie.fromJson(x))),
+        totalPages: json["total_pages"],
+        totalResults: json["total_results"],
+      );
+
+  // Map<String, dynamic> toJson() => {
+  //       "page": page,
+  //       "results": List<dynamic>.from(results.map((x) => x.toJson())),
+  //       "total_pages": totalPages,
+  //       "total_results": totalResults,
+  //     };
+}
+
+/*
+import 'dart:convert';
+
 class Movie {
   bool adult;
   String backdropPath;
   List<int> genreIds;
   int id;
-  String originalLanguage;
+  OriginalLanguage originalLanguage;
   String originalTitle;
   String overview;
   double popularity;
@@ -32,7 +72,6 @@ class Movie {
     required this.voteAverage,
     required this.voteCount,
   });
-
   get fullPosterImg {
     if (this.posterPath != null)
       return 'https://image.tmdb.org/t/p/w500${this.posterPath}';
@@ -48,7 +87,8 @@ class Movie {
         backdropPath: json["backdrop_path"],
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
-        originalLanguage: json["original_language"],
+        originalLanguage:
+            originalLanguageValues.map[json["original_language"]]!,
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
@@ -59,7 +99,7 @@ class Movie {
         voteAverage: json["vote_average"]?.toDouble(),
         voteCount: json["vote_count"],
       );
-/*
+
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
@@ -79,10 +119,14 @@ class Movie {
       };
 }
 
-enum OriginalLanguage { EN, ZH }
+enum OriginalLanguage { EN, FR, IS, TE }
 
-final originalLanguageValues =
-    EnumValues({"en": OriginalLanguage.EN, "zh": OriginalLanguage.ZH});
+final originalLanguageValues = EnumValues({
+  "en": OriginalLanguage.EN,
+  "fr": OriginalLanguage.FR,
+  "is": OriginalLanguage.IS,
+  "te": OriginalLanguage.TE
+});
 
 class EnumValues<T> {
   Map<String, T> map;
@@ -94,5 +138,6 @@ class EnumValues<T> {
     reverseMap = map.map((k, v) => MapEntry(v, k));
     return reverseMap;
   }
-  */
 }
+
+*/
